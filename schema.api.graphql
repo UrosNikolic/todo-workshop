@@ -1,0 +1,40 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  getTodoList(listId: ID!): TodoList
+}
+
+type Mutation {
+  createTodoList(todoListInput: TodoListInput!): TodoList!
+  addTodoItem(todoItemInput: TodoItemInput!): TodoItem!
+  removeTodoItem(listId: ID!, itemId: ID!): Boolean!
+  markTodoItemDone(listId: ID!, itemId: ID!): TodoItem!
+}
+
+type TodoList {
+  id: ID!
+  title: String!
+  createdAt: AWSDateTime!
+  done: Boolean!
+  todos: [TodoItem]
+}
+
+type TodoItem {
+  itemId: ID!
+  userId: ID!
+  title: String!
+  createdAt: AWSDateTime!
+  done: Boolean!
+}
+
+input TodoListInput {
+  title: String!
+}
+
+input TodoItemInput {
+  listId: ID!
+  title: String!
+}
